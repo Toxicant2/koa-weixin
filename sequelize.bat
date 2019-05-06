@@ -1,0 +1,1 @@
+sequelize-auto -h 47.94.87.82 -d koa-weixin -u toxicant -x 192920 -p 3306 ---dialect mysql -o "./schema"
