@@ -114,3 +114,24 @@ server errorError: Protocol "https:" not supported. Expected "http:"
 {"request":{"method":"GET","url":"/auth/071D67Ud1eSO9y0Wg1Ud1xggUd1D67Uk","header":{"host":"localhost:3000","connection":"keep-alive","pragma":"no-cache","cache-control":"no-cache","user-agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1 wechatdevtools/1.02.1904192 MicroMessenger/6.7.3 Language/zh_CN webview/","content-type":"application/json","accept":"*/*","referer":"https://servicewechat.com/wxff731b7b470bd303/devtools/page-frame.html","accept-encoding":"gzip, deflate, br"}},"response":{"status":404,"message":"Not Found","header":{"vary":"Origin","access-control-allow-origin":"*"}},"app":{"subdomainOffset":2,"proxy":false,"env":"development"},"originalUrl":"/auth/071D67Ud1eSO9y0Wg1Ud1xggUd1D67Uk","req":"<original node req>","res":"<original node res>","socket":"<original node socket>"}
 GET /auth/021At4Rv0oFpwb1C03Ov0sYoRv0At4R2 130ms 
 GET /auth/001XODqx09GaEc1YWysx0fRGqx0XODqH 119ms 
+GET / 5ms 
+GET /favicon.ico 2ms 
+GET /test 2ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 0ms 
+GET /favicon.ico 0ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 0ms 
+GET /favicon.ico 1ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
+GET /test 1ms 
+GET /favicon.ico 1ms 
