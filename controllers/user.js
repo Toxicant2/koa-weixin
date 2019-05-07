@@ -24,11 +24,12 @@ export default class UserCtrl {
     @description('1')
     @tag
     static async getUserTest(ctx) {
-        redis.set('koa-serssion', 'hahaha')
+        redis.set('koa-serssion', Date.now())
+        const session = await redis.get('koa-serssion')
         ctx.body = {
             STATUS: 1,
             MESSAGE: '测试成功',
-            ITEMS: null
+            ITEMS: session
         }
     }
 }
