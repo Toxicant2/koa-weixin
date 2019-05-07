@@ -1,3 +1,4 @@
+import redis from '../config/redis'
 import {
     tags,
     query,
@@ -23,6 +24,7 @@ export default class UserCtrl {
     @description('1')
     @tag
     static async getUserTest(ctx) {
+        redis.set('koa-serssion', 'hahaha')
         ctx.body = {
             STATUS: 1,
             MESSAGE: '测试成功',
