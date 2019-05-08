@@ -1,15 +1,13 @@
-const path = require("path")
-const app = new (require("koa"))()
-const bodyparser = require("koa-bodyparser")
-const koaBody = require("koa-body")
-const json = require("koa-json")
-const onerror = require("koa-onerror")
-const logger = require("koa-logger")
-const koaStatic = require("koa-static")
-const cors = require("koa2-cors")
-const historyApiFallback = require("koa-history-api-fallback")
-
-import router from "./controllers/index"
+const path = require('path')
+const app = new (require('koa'))()
+const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body')
+const json = require('koa-json')
+const onerror = require('koa-onerror')
+const logger = require('koa-logger')
+const koaStatic = require('koa-static')
+const cors = require('koa2-cors')
+const historyApiFallback = require('koa-history-api-fallback')
 
 // error handler
 onerror(app)
@@ -25,41 +23,42 @@ app.use(
 )
 
 // middlewares
-app.use(bodyparser())
+app
+    .use(bodyparser())
     .use(json())
     .use(logger())
     .use(cors())
     .use(historyApiFallback())
 
-const fs = require("fs")
+const fs = require('fs')
 
 function writeLog(data) {
-    fs.appendFile("./log.txt", data, "utf8", e => {})
+    fs.appendFile('./log.txt', data, 'utf8', e => {})
 }
 
 // logger
-app.use(async (ctx, next) => {
+app.use(async(ctx, next) => {
     const start = new Date()
-    if (ctx.method.toLocaleLowerCase() === "get") {
+    if (ctx.method.toLocaleLowerCase() === 'get') {
         ctx.request.url = ctx.originalUrl
     }
     await next()
     const ms = new Date() - start
-    writeLog(ctx.method + " " + ctx.url + " " + ms + "ms \r\n")
+    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms \r\n')
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // error-handling
-app.on("error", (err, ctx) => {
-    writeLog("server error" + err + "\n" + JSON.stringify(ctx) + "\r\n")
-    console.error("server error", err, ctx)
+app.on('error', (err, ctx) => {
+    writeLog('server error' + err + '\n' + JSON.stringify(ctx) + '\r\n')
+    console.error('server error', err, ctx)
 })
 
 // 静态文件服务 koa-static 规则位于 koa-router 的系列规则之前
-app.use(koaStatic(path.resolve(__dirname, "./public")))
+app.use(koaStatic(path.resolve(__dirname, './public')))
 
-app
-    .use(router.routes())
-    .use(router.allowedMethods()) // 将路由规则挂载到Koa上。
+// 路由汇总（注册路由）
+const registerRouter = require('./routers')
+app.use(registerRouter())
 
 module.exports = app

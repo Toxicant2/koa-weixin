@@ -1,17 +1,5 @@
 import redis from '../config/redis'
-import {
-    tags,
-    query,
-    path,
-    body,
-    formData,
-    // middlewares,
-    summary,
-    description,
-    request,
-    prefix
-} from 'koa-swagger-decorator'
-const tag = tags(['User'])
+
 export default class UserCtrl {
     /**
      * 测试接口
@@ -19,10 +7,6 @@ export default class UserCtrl {
      * @param {*} ctx
      * @memberof UserCtrl
      */
-    @request('GET', '/test')
-    @summary('测试接口')
-    @description('1')
-    @tag
     static async getUserTest(ctx) {
         redis.set('koa-serssion', Date.now())
         const session = await redis.get('koa-serssion')
