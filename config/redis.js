@@ -1,5 +1,6 @@
-const REDIS = require('redis')
-const client = REDIS.createClient({
+const config = require('./index')
+const redis = require('redis')
+const client = redis.createClient({
     retry_strategy(options) {
         if (options.error && options.error.code === 'ECONNREFUSED') {
             return new Error('The server refused the connection')
@@ -13,7 +14,10 @@ const client = REDIS.createClient({
         return Math.min(options.attempt * 100, 3000)
     }
 })
-const redis = {
+// redis auth
+client.auth(config.RedisPasswd)
+
+const clientRedis = {
     get(key) {
         return new Promise((resolve, reject) => {
             client.get(key, function(err, reply) {
@@ -25,9 +29,9 @@ const redis = {
         })
     },
 
-    set(key, val, duration = 60 * 60 * 12) {
+    set(key, val, duration) {
         client.set(key, val)
-        client.expire(key, duration) // 秒
+        if (duration) client.expire(key, duration)
     },
 
     del(key) {
@@ -38,4 +42,4 @@ const redis = {
     //     client.quit()
     // }
 }
-export default redis
+export default clientRedis

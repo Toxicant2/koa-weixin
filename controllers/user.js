@@ -1,4 +1,4 @@
-import redis from '../config/redis'
+import clientRedis from '../config/redis'
 
 export default class UserCtrl {
     /**
@@ -8,8 +8,8 @@ export default class UserCtrl {
      * @memberof UserCtrl
      */
     static async getUserTest(ctx) {
-        redis.set('koa-serssion', Date.now())
-        const session = await redis.get('koa-serssion')
+        clientRedis.set('koa-session', Date.now())
+        const session = await clientRedis.get('koa-session')
         ctx.body = {
             STATUS: 1,
             MESSAGE: '测试成功',
